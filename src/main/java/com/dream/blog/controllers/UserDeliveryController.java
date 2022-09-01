@@ -47,9 +47,9 @@ public class UserDeliveryController {
 		
 
 		@GetMapping("/{userId}")
-		public ResponseEntity<User_DeliveryDto> getSingleUsersDetail(@PathVariable("userId") Integer userId) {
+		public ResponseEntity<User_DeliveryDto> getSingleUsersMsgDeliveryDetail(@PathVariable("userId") Integer userId) {
 
-			System.out.println("Controller :: Inside Method getSingleUsersDetail()");
+			System.out.println("Controller :: Inside Method getSingleUsersMsgDeliveryDetail()");
 
 			return ResponseEntity.ok(this.user_DeliveryService.getuserMsgDeliveryDetailById(userId));
 
