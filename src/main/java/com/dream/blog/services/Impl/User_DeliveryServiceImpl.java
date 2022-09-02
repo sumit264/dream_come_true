@@ -39,20 +39,27 @@ public class User_DeliveryServiceImpl implements User_DeliveryService{
 	}
 
 	@Override
-	public User_DeliveryDto getuserMsgDeliveryDetailById(Integer userId) {
+	public User_DeliveryDto getuserMsgDeliveryDetailById(Integer userId) throws User_DeliveryServiceImplException {
 		
-		User_Delivery user_Delivery = this.user_DeliveryRepo.findById(userId).orElseThrow(() -> new NullPointerException("Id Not Found Exception"));
+		User_Delivery user_DetailsById = this.user_DeliveryRepo.findById(userId).orElseThrow(() -> 
+		new User_DeliveryServiceImplException("User Detail Not Found For User_Id "+userId+""));
 
-		User_DeliveryDto deliveryDto = this.userToDto(user_Delivery);
+		
+		User_DeliveryDto deliveryDto = this.userToDto(user_DetailsById);
 
 		return deliveryDto;
 	}
 
 	@Override
-	public List<User_DeliveryDto> getAllUserMsgDeliveryDetail() {
+	public List<User_DeliveryDto> getAllUserMsgDeliveryDetail() throws User_DeliveryServiceImplException {
 		System.out.println("SignUp Service :: Inside the getAllUserMsgDeliveryDetail() method");
 
 		List<User_Delivery> allUserDetails = this.user_DeliveryRepo.findAll();
+		
+		if(allUserDetails==null) {
+			
+			throw new User_DeliveryServiceImplException();
+		}
 
 		List<User_DeliveryDto> userDetails = allUserDetails.stream().map((deliveryDetails -> this.userToDto(deliveryDetails))).collect(Collectors.toList());
 
