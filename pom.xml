@@ -26,11 +26,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 		<!-- Spring Security dependencey -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
+		</dependency>
+		<!-- Spring Security dependencey -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
+			</dependency> -->
 
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
@@ -42,11 +46,8 @@
 		</dependency>
 		<!-- Added Swagger for Api documentation -->
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
-		<!-- <dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>io.springfox</groupId> <artifactId>springfox-boot-starter</artifactId> 
+			<version>3.0.0</version> </dependency> -->
 		<!-- Spring boot Cache -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache -->
@@ -64,17 +65,19 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Added dependencey for JWT Authentication -->
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-		<!-- <dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>io.jsonwebtoken</groupId> <artifactId>jjwt</artifactId> 
+			<version>0.9.1</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

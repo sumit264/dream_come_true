@@ -90,7 +90,7 @@ public class LoginServiceImpl implements LoginService {
 		LoginDto loginDto=new LoginDto();
 		
 		 loginDto.setId(login.getId());
-		 loginDto.setUserName(login.getUserName());
+		 loginDto.setUserName(login.getUsername());
 		 
 		 loginDto.setPassword(login.getPassword());
 		

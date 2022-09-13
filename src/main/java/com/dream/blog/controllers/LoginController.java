@@ -25,15 +25,15 @@ public class LoginController {
 
 	@PostMapping("/userLogin")
 	public ResponseEntity<LoginDto> userLogin(@Valid @RequestBody LoginDto userDto) {
-		
-		System.out.println("Controller :: Inside Method userEntr()y");
+
+		System.out.println("Controller :: Inside Method userEntry()");
 
 		LoginDto userLogin = this.loginService.userLogin(userDto);
 		return new ResponseEntity<>(userLogin, HttpStatus.CREATED);
 
 	}
 
-	// get- get All User 
+	// get- get All User
 	@GetMapping("/")
 	public ResponseEntity<List<LoginDto>> getAllUsers() {
 
@@ -41,15 +41,14 @@ public class LoginController {
 		return ResponseEntity.ok(this.loginService.getAllUser());
 
 	}
-	
+
 	@GetMapping("/{userId}")
-	public ResponseEntity<LoginDto> getSingleUsersDetail(@PathVariable ("userId") Integer userId){
+	public ResponseEntity<LoginDto> getSingleUsersDetail(@PathVariable("userId") Integer userId) {
 
 		System.out.println("Controller :: Inside Method getSingleUsersDetail()");
-		
+
 		return ResponseEntity.ok(this.loginService.getLoginUserDetailById(userId));
-		
-		
+
 	}
 
 }

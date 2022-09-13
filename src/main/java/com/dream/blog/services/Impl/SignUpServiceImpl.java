@@ -7,8 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dream.blog.entities.Login;
 import com.dream.blog.entities.SignUp;
+import com.dream.blog.payloads.LoginDto;
 import com.dream.blog.payloads.SignUpDto;
+import com.dream.blog.repositories.LoginRepo;
 import com.dream.blog.repositories.SignUpRepo;
 import com.dream.blog.services.SignUpService;
 
@@ -21,6 +24,9 @@ public class SignUpServiceImpl implements SignUpService {
 	@Autowired
 	private SignUpRepo signUpRepo;
 
+	@Autowired
+	private LoginRepo loginRepo;
+
 	@Override
 	public SignUpDto updateSignUp(SignUpDto user, Integer userId) {
 		return null;
@@ -30,7 +36,8 @@ public class SignUpServiceImpl implements SignUpService {
 	@Override
 	public SignUpDto getSignUpUserDetailById(Integer userId) {
 
-		SignUp signUpUserDetail = this.signUpRepo.findById(userId).orElseThrow(() -> new NullPointerException("Id Not Found Exception"));
+		SignUp signUpUserDetail = this.signUpRepo.findById(userId)
+				.orElseThrow(() -> new NullPointerException("Id Not Found Exception"));
 
 		SignUpDto signUpDto = this.userToDto(signUpUserDetail);
 
@@ -44,7 +51,8 @@ public class SignUpServiceImpl implements SignUpService {
 
 		List<SignUp> signUpuserDetails = this.signUpRepo.findAll();
 
-		List<SignUpDto> userDetails = signUpuserDetails.stream().map((signUpUsers -> this.userToDto(signUpUsers))).collect(Collectors.toList());
+		List<SignUpDto> userDetails = signUpuserDetails.stream().map((signUpUsers -> this.userToDto(signUpUsers)))
+				.collect(Collectors.toList());
 
 		return userDetails;
 	}
@@ -59,9 +67,17 @@ public class SignUpServiceImpl implements SignUpService {
 
 		System.out.println("SignUp Service :: Inside the user Login");
 
+		Login login = new Login();
+
 		SignUp signUp = this.dtoToUser(signUpDto);
 
 		SignUp savedSignUpUser = this.signUpRepo.save(signUp);
+
+		login.setUserName(signUp.getUserName());
+		login.setPassword(signUp.getPassword());
+
+		Login saveUser = this.loginRepo.save(login);
+		System.out.println(saveUser);
 
 		return this.userToDto(savedSignUpUser);
 	}
