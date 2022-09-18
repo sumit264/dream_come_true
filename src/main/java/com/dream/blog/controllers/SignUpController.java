@@ -2,6 +2,8 @@ package com.dream.blog.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dream.blog.payloads.SignUpDto;
@@ -24,14 +27,15 @@ public class SignUpController {
 	@Autowired
 	SignUpService signUpService;
 
-	@PostMapping("/userSignUp")
-	public ResponseEntity<SignUpDto> userSignUp(@Valid @RequestBody SignUpDto userDto) {
+	//@PostMapping("/userSignUp")
 
-		System.out.println("Controller :: Inside Method userSignUp()y");
+	@RequestMapping(value = "/userSignUp", method = RequestMethod.POST)
+	public ResponseEntity<SignUpDto> userSignUp(SignUpDto userDto,HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println("Home Controller :: Inside Method userSignUp()y");
 
 		SignUpDto userSignUp = this.signUpService.userSignUp(userDto);
 		return new ResponseEntity<>(userSignUp, HttpStatus.CREATED);
-
 	}
 
 	// get- get All User
