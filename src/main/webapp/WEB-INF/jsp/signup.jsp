@@ -38,6 +38,7 @@
             <input name="dob" type="text" class="form-control" placeholder="DOB" autofocus="true"/>
             
             <span></span>
+            
             <span></span>
             <br></br>
 

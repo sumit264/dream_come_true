@@ -2,21 +2,21 @@ package com.dream.blog.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dream.blog.exceptionhandling.ResourceNotFoundException;
-import com.dream.blog.payloads.SignUpDto;
-import com.dream.blog.payloads.User_DeliveryDto;
+ import com.dream.blog.payloads.User_DeliveryDto;
 import com.dream.blog.services.User_DeliveryService;
 import com.dream.blog.services.Impl.User_DeliveryServiceImplException;
 
@@ -28,13 +28,36 @@ public class UserDeliveryController {
 	@Autowired
 	User_DeliveryService user_DeliveryService;
 	
-	@PostMapping("/messageInfo")
-	public ResponseEntity<User_DeliveryDto> userMsgDelivery(@Valid @RequestBody User_DeliveryDto user_DeliveryDto) {
+	//@PostMapping("/messageInfo") //In Future, We will Use this method
 
-		System.out.println("Controller :: Inside Method userMsgDelivery()y");
+	/*
+	 * @RequestMapping(value = "/messageInfo", method = RequestMethod.POST) public
+	 * ResponseEntity<User_DeliveryDto> userMsgDelivery(User_DeliveryDto
+	 * user_DeliveryDto,HttpServletRequest request, HttpServletResponse response) {
+	 * 
+	 * System.out.println("Controller :: Inside Method userMsgDelivery()");
+	 * 
+	 * User_DeliveryDto deliveryDto =
+	 * this.user_DeliveryService.createuserMsgDeliveryDetail(user_DeliveryDto);
+	 * 
+	 * return new ResponseEntity<>(deliveryDto, HttpStatus.CREATED);
+	 * 
+	 * }
+	 */
+	
+	@RequestMapping(value = "/messageInfo", method = RequestMethod.POST)
+	public ModelAndView userMsgDelivery(User_DeliveryDto user_DeliveryDto,HttpServletRequest request, HttpServletResponse response) {
+ 
+		ModelAndView model = new ModelAndView("/status");
+		System.out.println("Controller :: Inside Method userMsgDelivery()");
 
 		User_DeliveryDto deliveryDto = this.user_DeliveryService.createuserMsgDeliveryDetail(user_DeliveryDto);
-		return new ResponseEntity<>(deliveryDto, HttpStatus.CREATED);
+		
+		model.addObject("deliverydate", deliveryDto.getDeliveryDate());
+
+		model.addObject("message", deliveryDto.getMessageToBeDelivery());
+		
+		return model;
 
 	}
 	

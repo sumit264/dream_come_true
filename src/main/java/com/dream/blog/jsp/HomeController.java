@@ -1,32 +1,28 @@
 package com.dream.blog.jsp;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dream.blog.payloads.SignUpDto;
+import com.dream.blog.entities.Login;
 import com.dream.blog.services.SignUpService;
 
 @Controller
 public class HomeController {
 	
-
+	@Autowired 
+	 private HttpSession httpSession;
 	@Autowired
 	SignUpService signUpService;
 
 	@RequestMapping(value = "/login_success_handler", method = RequestMethod.POST)
 	public String index() {
 		System.out.println("=======login_success_handler==========");
-		return "login";
+		return "/UserInfo";
 	}
 
 	@RequestMapping(value = "/login_failure_handler", method = RequestMethod.POST)
@@ -35,6 +31,17 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/UserInfo", method = RequestMethod.GET)
+	public String UserInfo() {
+		
+		Login login=new Login();
+		System.out.println("=======UserInfo==========");
+		
+		login=(Login) httpSession.getAttribute("logindetails");
+		
+		System.out.println("Login Details :: "+login.getUsername()+"  "+login.getPassword());
+		return "UserInfo";
+	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {

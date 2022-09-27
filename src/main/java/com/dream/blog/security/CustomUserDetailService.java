@@ -1,5 +1,7 @@
 package com.dream.blog.security;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +17,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
 	@Autowired 
 	private LoginRepo loginRepo;
+	
+	@Autowired 
+	 private HttpSession httpSession;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,10 +35,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
 			System.out.println("=======login details=======" + login.getId() +"=="+login.getPassword()+"=="+login.getUsername());
 			//login.setPassword("$2a$10$EzRGBjjtI1p0n2rGTA2naeDYT00AiWd/hXGVXX9f6ZDHHwTogYvGm");
-			
+			httpSession.setAttribute("logindetails", login);
 			return login;
 		} catch (ResourceNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

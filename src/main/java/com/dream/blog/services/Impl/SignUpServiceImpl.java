@@ -35,6 +35,7 @@ public class SignUpServiceImpl implements SignUpService {
 
 	@Override
 	public SignUpDto getSignUpUserDetailById(Integer userId) {
+		
 
 		SignUp signUpUserDetail = this.signUpRepo.findById(userId)
 				.orElseThrow(() -> new NullPointerException("Id Not Found Exception"));

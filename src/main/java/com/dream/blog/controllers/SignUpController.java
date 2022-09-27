@@ -30,7 +30,7 @@ public class SignUpController {
 	//@PostMapping("/userSignUp")
 
 	@RequestMapping(value = "/userSignUp", method = RequestMethod.POST)
-	public ResponseEntity<SignUpDto> userSignUp(SignUpDto userDto,HttpServletRequest request, HttpServletResponse response) {
+	public ResponseEntity<SignUpDto> userSignUp(@Valid SignUpDto userDto,HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("Home Controller :: Inside Method userSignUp()y");
 
